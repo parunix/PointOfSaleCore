@@ -1,33 +1,52 @@
 package com.sale.pointofsalecore.tools;
 
-import com.sale.pointofsalecore.tools.Pair;
+import static com.sale.pointofsalecore.tools.Pair.of;
+import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import static org.junit.Assert.*;
 
 /**
  *
- * @author Bartosz Cichowicz
+ * @author parun
  */
 public class PairIT {
+    private static final Logger LOG = getLogger(PairIT.class.getName());
     
-    public PairIT() {
-    }
-    
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass() {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() {
     }
     
+    /**
+     *
+     */
+    public PairIT() {
+    }
+    
+    /**
+     *
+     */
     @Before
     public void setUp() {
     }
     
+    /**
+     *
+     */
     @After
     public void tearDown() {
     }
@@ -37,11 +56,10 @@ public class PairIT {
      */
     @org.junit.Test
     public void testOf() {
-        System.out.println("of");
         Object left = null;
         Object right = null;
         Pair expResult = null;
-        Pair result = Pair.of(left, right);
+        Pair result = of(left, right);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

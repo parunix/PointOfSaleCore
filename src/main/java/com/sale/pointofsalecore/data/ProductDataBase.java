@@ -2,20 +2,26 @@ package com.sale.pointofsalecore.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
 
 /**
  *
- * @author Bartosz Cichowicz
+ * @author parun
  */
 public class ProductDataBase {
 
-    private ProductItem productItem;
 
     /**
      * available product Items List
      */
     public static final List<ProductItem> PRODUCT_LIST = new ArrayList<>();
+    private static final Logger LOG = getLogger(ProductDataBase.class.getName());
+    private ProductItem productItem;
 
+    /**
+     *
+     */
     public ProductDataBase() {
         productItem=new ProductItem();
         productItem.setId(1);

@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
 import javax.swing.DefaultListSelectionModel;
-import javax.swing.UIManager;
+import static javax.swing.UIManager.getSystemLookAndFeelClassName;
+import static javax.swing.UIManager.setLookAndFeel;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
- * @author Bartosz Cichowicz
+ * @author parun
  */
 public class PointOfSaleFrame extends javax.swing.JFrame {
 
@@ -30,9 +32,9 @@ public class PointOfSaleFrame extends javax.swing.JFrame {
         this.basketItems = basketItems;
 
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            setLookAndFeel(getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(PointOfSaleFrame.class.getName()).log(Level.SEVERE, null, ex);
+            getLogger(PointOfSaleFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         initComponents();
@@ -223,4 +225,5 @@ public class PointOfSaleFrame extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaPrinter;
     private javax.swing.JToggleButton jToggleButtonStart;
     // End of variables declaration//GEN-END:variables
+    private static final Logger LOG = getLogger(PointOfSaleFrame.class.getName());
 }

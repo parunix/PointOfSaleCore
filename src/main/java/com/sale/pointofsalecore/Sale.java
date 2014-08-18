@@ -5,27 +5,44 @@ import com.sale.pointofsalecore.devices.BarCodeScanner;
 import com.sale.pointofsalecore.devices.LcdDisplay;
 import com.sale.pointofsalecore.devices.PrinterDevice;
 import com.sale.pointofsalecore.tools.ScannerCodes;
+import static java.lang.String.valueOf;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
 
 /**
  *
- * @author Bartosz Cichowicz
+ * @author parun
  */
 public class Sale {
+    private static final Logger LOG = getLogger(Sale.class.getName());
 
     private BarCodeScanner barCodeScanner;
     private PrinterDevice printerDevice;
     private LcdDisplay lcd;
 
+    /**
+     *
+     * @return
+     */
     public LcdDisplay getLcd() {
         return lcd;
     }
 
+    /**
+     *
+     * @return
+     */
     public PrinterDevice getPrinterDevice() {
         return printerDevice;
     }
 
+    /**
+     *
+     * @param barCode
+     * @return
+     */
     public String itemProcessing(String barCode) {
         barCodeScanner = new BarCodeScanner(barCode);
         lcd = new LcdDisplay();
@@ -38,6 +55,10 @@ public class Sale {
         return lcd.getMessage();
     }
 
+    /**
+     *
+     * @param barCodes
+     */
     public void countSum(List<String> barCodes) {
         printerDevice = new PrinterDevice();
         lcd = new LcdDisplay();
@@ -53,11 +74,11 @@ public class Sale {
         }
 
         for (ProductItem p : products) {
-            billList.add(p.getName() + " " + String.valueOf(p.getPrice()));
+            billList.add(p.getName() + " " + valueOf(p.getPrice()));
             sum += p.getPrice();
         }
 
-        summary = "Sum: " + String.valueOf(sum);
+        summary = "Sum: " + valueOf(sum);
 
         billList.add(summary);
 

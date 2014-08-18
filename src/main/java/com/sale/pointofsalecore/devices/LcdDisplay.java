@@ -1,10 +1,14 @@
 package com.sale.pointofsalecore.devices;
 
+import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
+
 /**
  *
- * @author Bartosz Cichowicz
+ * @author parun
  */
 public class LcdDisplay {
+    private static final Logger LOG = getLogger(LcdDisplay.class.getName());
     
     private String message;
 

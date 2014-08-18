@@ -1,14 +1,18 @@
 package com.sale.pointofsalecore.data;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import static java.util.Arrays.asList;
+import static java.util.Collections.unmodifiableList;
 import java.util.List;
+import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
 
 /**
  *
- * @author Bartosz Cichowicz
+ * @author parun
  */
 public class Basket {
+    private static final Logger LOG = getLogger(Basket.class.getName());
 
     private List<String> basketItems;
 
@@ -16,7 +20,7 @@ public class Basket {
      * @return the basketItems
      */
     public List<String> getBasketItems() {
-        return basketItems;
+        return unmodifiableList(basketItems);
 
     }
 
@@ -26,7 +30,7 @@ public class Basket {
     public void setBasketItems(String... args) {
         
         basketItems = new ArrayList<>();       
-        basketItems.addAll(Arrays.asList(args));
+        basketItems.addAll(asList(args));
 
     }
 }

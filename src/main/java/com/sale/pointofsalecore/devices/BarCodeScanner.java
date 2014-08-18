@@ -3,16 +3,30 @@ package com.sale.pointofsalecore.devices;
 import com.sale.pointofsalecore.data.ProductDataBase;
 import com.sale.pointofsalecore.data.ProductItem;
 import com.sale.pointofsalecore.tools.ScannerCodes;
+import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
 
 /**
  *
- * @author Bartosz Cichowicz
+ * @author parun
  */
 public class BarCodeScanner {
+    private static final Logger LOG = getLogger(BarCodeScanner.class.getName());
 
+    /**
+     *
+     */
     public ProductItem productItem;
+
+    /**
+     *
+     */
     public String scannerCode;
 
+    /**
+     *
+     * @param barCode
+     */
     public BarCodeScanner(String barCode) {
 
         productItem = new ProductItem();

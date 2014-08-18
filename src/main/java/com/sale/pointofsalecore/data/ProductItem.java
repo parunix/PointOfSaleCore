@@ -1,10 +1,14 @@
 package com.sale.pointofsalecore.data;
 
+import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
+
 /**
  *
- * @author Bartosz Cichowicz
+ * @author parun
  */
 public class ProductItem {
+    private static final Logger LOG = getLogger(ProductItem.class.getName());
     
     private Integer id;
     private String name;

@@ -1,12 +1,16 @@
 package com.sale.pointofsalecore.devices;
 
+import static java.util.Collections.unmodifiableList;
 import java.util.List;
+import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
 
 /**
  *
- * @author Bartosz Cichowicz
+ * @author parun
  */
 public class PrinterDevice {
+    private static final Logger LOG = getLogger(PrinterDevice.class.getName());
     
     private List<String> bill;
 
@@ -14,7 +18,7 @@ public class PrinterDevice {
      * @return the bill
      */
     public List<String> getBill() {
-        return bill;
+        return unmodifiableList(bill);
     }
 
     /**
