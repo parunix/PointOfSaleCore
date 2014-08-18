@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 
@@ -31,6 +32,10 @@ public class Basket {
         
         basketItems = new ArrayList<>();       
         basketItems.addAll(asList(args));
+        
+        for(String m : basketItems){
+            LOG.log(Level.FINE, m);
+        }
 
     }
 }

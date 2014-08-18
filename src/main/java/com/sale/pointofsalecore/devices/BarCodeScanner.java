@@ -3,6 +3,7 @@ package com.sale.pointofsalecore.devices;
 import com.sale.pointofsalecore.data.ProductDataBase;
 import com.sale.pointofsalecore.data.ProductItem;
 import com.sale.pointofsalecore.tools.ScannerCodes;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 
@@ -11,27 +12,24 @@ import static java.util.logging.Logger.getLogger;
  * @author parun
  */
 public class BarCodeScanner {
+    
     private static final Logger LOG = getLogger(BarCodeScanner.class.getName());
 
     /**
      *
      */
-    public ProductItem productItem;
+    private ProductItem productItem;
 
     /**
      *
      */
-    public String scannerCode;
+    private String scannerCode;
 
     /**
      *
      * @param barCode
      */
     public BarCodeScanner(String barCode) {
-
-        productItem = new ProductItem();
-        
-        //System.out.println(barCode);
 
         if (!barCode.isEmpty()) {
 
@@ -48,5 +46,34 @@ public class BarCodeScanner {
             productItem = null;
             scannerCode = ScannerCodes.INVALID_BAR_CODE;
         }
+        LOG.log(Level.INFO, scannerCode);
+    }
+
+    /**
+     * @return the productItem
+     */
+    public ProductItem getProductItem() {
+        return productItem;
+    }
+
+    /**
+     * @param productItem the productItem to set
+     */
+    public void setProductItem(ProductItem productItem) {
+        this.productItem = productItem;
+    }
+
+    /**
+     * @return the scannerCode
+     */
+    public String getScannerCode() {
+        return scannerCode;
+    }
+
+    /**
+     * @param scannerCode the scannerCode to set
+     */
+    public void setScannerCode(String scannerCode) {
+        this.scannerCode = scannerCode;
     }
 }

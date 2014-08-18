@@ -8,6 +8,7 @@ import com.sale.pointofsalecore.tools.ScannerCodes;
 import static java.lang.String.valueOf;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 
@@ -44,13 +45,16 @@ public class Sale {
      * @return
      */
     public String itemProcessing(String barCode) {
+        
+        LOG.log(Level.INFO, barCode);
+        
         barCodeScanner = new BarCodeScanner(barCode);
         lcd = new LcdDisplay();
-        if (barCodeScanner.scannerCode.equals(ScannerCodes.PRODUCT_FOUND)) {
-            lcd.setMessage(barCodeScanner.productItem.getName() + "  "
-                    + barCodeScanner.productItem.getPrice() + " PLN");
+        if (barCodeScanner.getScannerCode().equals(ScannerCodes.PRODUCT_FOUND)) {
+            lcd.setMessage(barCodeScanner.getProductItem().getName() + "  "
+                    + barCodeScanner.getProductItem().getPrice() + " PLN");
         } else {
-            lcd.setMessage(barCodeScanner.scannerCode);
+            lcd.setMessage(barCodeScanner.getScannerCode());
         }
         return lcd.getMessage();
     }
@@ -60,6 +64,11 @@ public class Sale {
      * @param barCodes
      */
     public void countSum(List<String> barCodes) {
+        
+        for(String m : barCodes){
+            LOG.log(Level.FINE, m);
+        }
+        
         printerDevice = new PrinterDevice();
         lcd = new LcdDisplay();
         List<String> billList = new ArrayList<>();
@@ -93,8 +102,8 @@ public class Sale {
 
         barCodeScanner = new BarCodeScanner(barCode);
 
-        if (barCodeScanner.scannerCode.equals(ScannerCodes.PRODUCT_FOUND)) {
-            productItem = barCodeScanner.productItem;
+        if (barCodeScanner.getScannerCode().equals(ScannerCodes.PRODUCT_FOUND)) {
+            productItem = barCodeScanner.getProductItem();
         } else {
             productItem = null;
         }

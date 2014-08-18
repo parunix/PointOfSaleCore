@@ -1,5 +1,6 @@
 package com.sale.pointofsalecore.data;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 
@@ -10,23 +11,32 @@ import static java.util.logging.Logger.getLogger;
 public class ProductItem {
     private static final Logger LOG = getLogger(ProductItem.class.getName());
     
-    private Integer id;
-    private String name;
-    private Float price;
-    private String barcode;
+    private final Integer id;
+    private final String name;
+    private final Float price;
+    private final String barcode;
+    
+    /**
+     *
+     * @param id
+     * @param name
+     * @param price
+     * @param barcode
+     */
+    public ProductItem(Integer id,String name,Float price, String barcode){
+        this.id=id;
+        this.name=name;
+        this.price=price;
+        this.barcode=barcode;
+        
+        LOG.log(Level.INFO, "Product is set");
+    }
 
     /**
      * @return the id
      */
     public Integer getId() {
         return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     /**
@@ -37,24 +47,10 @@ public class ProductItem {
     }
 
     /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
      * @return the price
      */
     public Float getPrice() {
         return price;
-    }
-
-    /**
-     * @param price the price to set
-     */
-    public void setPrice(Float price) {
-        this.price = price;
     }
 
     /**
@@ -64,11 +60,5 @@ public class ProductItem {
         return barcode;
     }
 
-    /**
-     * @param barcode the barcode to set
-     */
-    public void setBarcode(String barcode) {
-        this.barcode = barcode;
-    }
     
 }

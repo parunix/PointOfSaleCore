@@ -1,5 +1,6 @@
 package com.sale.pointofsalecore.devices;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 
@@ -23,6 +24,7 @@ public class LcdDisplay {
      * @param message the message to set
      */
     public void setMessage(String message) {
+        LOG.log(Level.INFO, message);
         this.message = message;
     }
     

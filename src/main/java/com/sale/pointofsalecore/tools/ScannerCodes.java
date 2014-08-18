@@ -1,5 +1,6 @@
 package com.sale.pointofsalecore.tools;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 
@@ -27,6 +28,7 @@ public class ScannerCodes {
     private static final Logger LOG = getLogger(ScannerCodes.class.getName());
 
     private ScannerCodes() {
+        LOG.log(Level.FINE, "Scaner started");
     }
 
 }

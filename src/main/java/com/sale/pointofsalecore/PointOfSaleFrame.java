@@ -12,9 +12,25 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
- * @author parun
+ * @author Bartosz Cichowicz
  */
 public class PointOfSaleFrame extends javax.swing.JFrame {
+    private static final Logger LOG = getLogger(PointOfSaleFrame.class.getName());
+
+    private javax.swing.JButton jButtonExit;
+    private javax.swing.JButton jButtonScan;
+    private javax.swing.JLabel jLabelStatus;
+    private javax.swing.JList jListBasket;
+    private javax.swing.JPanel jPanelControl;
+    private javax.swing.JPanel jPanelInputs;
+    private javax.swing.JPanel jPanelOutPuts;
+    private javax.swing.JPanel jPanelPointOfSale;
+    private javax.swing.JScrollPane jScrollPaneLcd;
+    private javax.swing.JScrollPane jScrollPanePrinter;
+    private javax.swing.JScrollPane jScrollPanelBasket;
+    private javax.swing.JTextArea jTextAreaLcd;
+    private javax.swing.JTextArea jTextAreaPrinter;
+    private javax.swing.JToggleButton jToggleButtonStart;
 
     private final List<String> basketItems;
     private List<String> selectedBasketItems;
@@ -44,8 +60,6 @@ public class PointOfSaleFrame extends javax.swing.JFrame {
         return basketItems.toArray(new String[basketItems.size()]);
     }
 
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanelPointOfSale = new javax.swing.JPanel();
@@ -102,6 +116,7 @@ public class PointOfSaleFrame extends javax.swing.JFrame {
         jToggleButtonStart.setText("Ready");
         jToggleButtonStart.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jToggleButtonStart.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButtonStartActionPerformed(evt);
             }
@@ -112,6 +127,7 @@ public class PointOfSaleFrame extends javax.swing.JFrame {
         jButtonScan.setText("Scan");
         jButtonScan.setEnabled(false);
         jButtonScan.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonScanActionPerformed(evt);
             }
@@ -121,6 +137,7 @@ public class PointOfSaleFrame extends javax.swing.JFrame {
         jButtonExit.setText("Exit");
         jButtonExit.setEnabled(false);
         jButtonExit.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExitActionPerformed(evt);
             }
@@ -131,30 +148,39 @@ public class PointOfSaleFrame extends javax.swing.JFrame {
 
         jListBasket.setModel(new javax.swing.AbstractListModel() {
             String[] strings = createBasketList();
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+
+            @Override
+            public int getSize() {
+                return strings.length;
+            }
+
+            @Override
+            public Object getElementAt(int i) {
+                return strings[i];
+            }
         });
         jListBasket.setToolTipText("Put item to buy into basket"); // NOI18N
         jScrollPanelBasket.setViewportView(jListBasket);
         jListBasket.setSelectionModel(new DefaultListSelectionModel() {
+            @Override
             public void setSelectionInterval(int index0, int index1) {
-                if (isSelectedIndex(index0))
-                super.removeSelectionInterval(index0, index1);
-                else
-                super.addSelectionInterval(index0, index1);
+                if (isSelectedIndex(index0)) {
+                    super.removeSelectionInterval(index0, index1);
+                } else {
+                    super.addSelectionInterval(index0, index1);
+                }
             }
         });
 
         jPanelInputs.add(jScrollPanelBasket, java.awt.BorderLayout.CENTER);
-
         jPanelPointOfSale.add(jPanelInputs);
-
         getContentPane().add(jPanelPointOfSale);
-
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-    private void jToggleButtonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonStartActionPerformed
+    private void jToggleButtonStartActionPerformed(java.awt.event.ActionEvent evt) {
+
+        LOG.log(Level.INFO, "Start action");
 
         jTextAreaPrinter.setText(null);
         jButtonScan.setEnabled(true);
@@ -165,65 +191,43 @@ public class PointOfSaleFrame extends javax.swing.JFrame {
         selectedIx = jListBasket.getSelectedIndices();
         jToggleButtonStart.setEnabled(false);
         jTextAreaLcd.setText(null);
+    }
 
-    }//GEN-LAST:event_jToggleButtonStartActionPerformed
+    private void jButtonScanActionPerformed(java.awt.event.ActionEvent evt) {
 
-    private void jButtonScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonScanActionPerformed
+        LOG.log(Level.INFO, "Scan action");
 
-            sale = new Sale();
-            if (currentBasketItemCounter < selectedIx.length) {
-                jTextAreaLcd.setText(sale.itemProcessing(
-                        selectedBasketItems.get(currentBasketItemCounter)));
-                jListBasket.removeSelectionInterval(
-                        selectedIx[currentBasketItemCounter], 
-                        selectedIx[currentBasketItemCounter]);
-                currentBasketItemCounter += 1;
-            }
+        sale = new Sale();
+        if (currentBasketItemCounter < selectedIx.length) {
+            jTextAreaLcd.setText(sale.itemProcessing(
+                    selectedBasketItems.get(currentBasketItemCounter)));
+            jListBasket.removeSelectionInterval(
+                    selectedIx[currentBasketItemCounter],
+                    selectedIx[currentBasketItemCounter]);
+            currentBasketItemCounter += 1;
+        }
+    }
 
-        
-    }//GEN-LAST:event_jButtonScanActionPerformed
+    private void jButtonExitActionPerformed(java.awt.event.ActionEvent evt) {
 
-    private void jButtonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExitActionPerformed
-        
-        
+        LOG.log(Level.INFO, "Exit action");
+
         jToggleButtonStart.setEnabled(true);
         jButtonScan.setEnabled(false);
         jButtonExit.setEnabled(false);
         jListBasket.setEnabled(true);
         jListBasket.clearSelection();
         sale.countSum(selectedBasketItems);
-        
+
         jTextAreaLcd.setText(sale.getLcd().getMessage());
-        
-        for(String s : sale.getPrinterDevice().getBill()){
+
+        for (String s : sale.getPrinterDevice().getBill()) {
             jTextAreaPrinter.append(s);
             jTextAreaPrinter.append("\n");
         }
-        
-        
+
         selectedBasketItems = new ArrayList<>();
         currentBasketItemCounter = 0;
-        
         sale = new Sale();
-        
-        
-    }//GEN-LAST:event_jButtonExitActionPerformed
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonExit;
-    private javax.swing.JButton jButtonScan;
-    private javax.swing.JLabel jLabelStatus;
-    private javax.swing.JList jListBasket;
-    private javax.swing.JPanel jPanelControl;
-    private javax.swing.JPanel jPanelInputs;
-    private javax.swing.JPanel jPanelOutPuts;
-    private javax.swing.JPanel jPanelPointOfSale;
-    private javax.swing.JScrollPane jScrollPaneLcd;
-    private javax.swing.JScrollPane jScrollPanePrinter;
-    private javax.swing.JScrollPane jScrollPanelBasket;
-    private javax.swing.JTextArea jTextAreaLcd;
-    private javax.swing.JTextArea jTextAreaPrinter;
-    private javax.swing.JToggleButton jToggleButtonStart;
-    // End of variables declaration//GEN-END:variables
-    private static final Logger LOG = getLogger(PointOfSaleFrame.class.getName());
+    }
 }
